@@ -9,7 +9,7 @@ var player;
 var exit;
 
 function frame(){
-	//ctx.clearRect(0, 0, canvas.width, canvas.height);
+	if(!showMaze && !showPath){ctx.clearRect(0, 0, canvas.width, canvas.height)};
 	drawWalls();
 	if(player.x == exit.x && player.y == exit.y){
 		alert("You won!");

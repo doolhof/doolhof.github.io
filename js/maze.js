@@ -2,9 +2,10 @@ var grid = [];
 var lines = [];
 
 var gridSize = 10;
-var showMaze = true;
+var showMaze = false;
+var showPath = false;
 var lineCount = 50;
-var lineSpeed = Math.ceil(10/lineCount);
+var lineSpeed = 1;
 
 function initMaze(){
 	initGrid();
@@ -14,7 +15,7 @@ function initMaze(){
 }
 
 function finishMaze(){
-	ctx.clearRect(0, 0, canvas.width, canvas.height);
+	if(!showMaze){ctx.clearRect(0, 0, canvas.width, canvas.height);}
 	player = {x:Math.floor(Math.random()*(tiles.x.length-2)+1), y:Math.floor(Math.random()*(tiles.y.length-2)+1)};
 	exit = {x:Math.floor(tiles.x.length/2), y:Math.floor(tiles.y.length/2)};
 	frame();
@@ -109,13 +110,11 @@ function createMaze(i){
 
 function drawMaze(i){
 	if(lines[i].currentDot && lines[i].nextDot && lines[i].currentDot !== lines[i].nextDot){
-		if(showMaze){
-			ctx.beginPath();
-			ctx.moveTo(lines[i].currentDot.x, lines[i].currentDot.y);
-			ctx.lineTo(lines[i].nextDot.x, lines[i].nextDot.y);
-			ctx.closePath();
-			ctx.stroke();
-		}
+		ctx.beginPath();
+		ctx.moveTo(lines[i].currentDot.x, lines[i].currentDot.y);
+		ctx.lineTo(lines[i].nextDot.x, lines[i].nextDot.y);
+		ctx.closePath();
+		ctx.stroke();
 
 		var wallTile1 = {x:tiles.x.indexOf((lines[i].currentDot.x+lines[i].nextDot.x)/2 - Math.abs(lines[i].currentDot.y-lines[i].nextDot.y)/2), y:tiles.y.indexOf((lines[i].currentDot.y+lines[i].nextDot.y)/2 - Math.abs(lines[i].currentDot.x-lines[i].nextDot.x)/2)};
 		var wallTile2 = {x:tiles.x.indexOf((lines[i].currentDot.x+lines[i].nextDot.x)/2 + Math.abs(lines[i].currentDot.y-lines[i].nextDot.y)/2), y:tiles.y.indexOf((lines[i].currentDot.y+lines[i].nextDot.y)/2 + Math.abs(lines[i].currentDot.x-lines[i].nextDot.x)/2)};
