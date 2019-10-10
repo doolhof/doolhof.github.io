@@ -1,47 +1,43 @@
 document.onkeydown = function(e){
 	if(e.keyCode == "37"){//left
-		var move = true;
-		for(var j = 0; j < walls[player.x][player.y].length; j++){
-			if(walls[player.x][player.y][j].x == player.x-1 && walls[player.x][player.y][j].y == player.y){
-				move = false;
-			}
-		}
-		if(move){
-			player.x--;
-		}
+		move(-1,0);
 	}
 	if(e.keyCode == "38"){//up
-		var move = true;
-		for(var j = 0; j < walls[player.x][player.y].length; j++){
-			if(walls[player.x][player.y][j].x == player.x && walls[player.x][player.y][j].y == player.y-1){
-				move = false;
-			}
-		}
-		if(move){
-			player.y--;
-		}
+		move(0,-1);
 	}
 	if(e.keyCode == "39"){//right
-		var move = true;
-		for(var j = 0; j < walls[player.x][player.y].length; j++){
-			if(walls[player.x][player.y][j].x == player.x+1 && walls[player.x][player.y][j].y == player.y){
-				move = false;
-			}
-		}
-		if(move){
-			player.x++;
-		}
+		move(1,0);
 	}
 	if(e.keyCode == "40"){//down
-		var move = true;
-		for(var j = 0; j < walls[player.x][player.y].length; j++){
-			if(walls[player.x][player.y][j].x == player.x && walls[player.x][player.y][j].y == player.y+1){
-				move = false;
-			}
-		}
-		if(move){
-			player.y++;
+		move(0,1);
+	}
+}
+
+canvas.ontouchstart = function(e){
+	if(e.touches[0].clientY < canvas.height/4){
+		move(0,-1);
+	}
+	else if(e.touches[0].clientY > canvas.height/4*3){
+		move(0,1);
+	}
+	else if(e.touches[0].clientX < canvas.width/2){
+		move(-1,0);
+	}
+	else if(e.touches[0].clientX > canvas.width/2){
+		move(1,0);
+	}
+}
+
+function move(x,y){
+	var move = true;
+	for(var j = 0; j < walls[player.x][player.y].length; j++){
+		if(walls[player.x][player.y][j].x == player.x + x && walls[player.x][player.y][j].y == player.y + y){
+			move = false;
 		}
 	}
-	frame();
+	if(move){
+		player.x += x;
+		player.y += y;
+		frame();
+	}
 }
