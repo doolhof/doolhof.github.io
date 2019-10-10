@@ -14,7 +14,6 @@ function frame(){
 	if(player.x == exit.x && player.y == exit.y){
 		alert("You won!");
 		initMaze();
-		frame();
 	}
 }
 
