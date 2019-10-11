@@ -11,6 +11,7 @@ function initMaze(){
 	initGrid();
 	lines = [];
 	for(var i = 0; i < lineCount; i++){lines.push({currentDot:false, nextDot:false})};
+	player = {x:false, y:false};
 	maze();
 }
 
