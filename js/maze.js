@@ -16,7 +16,7 @@ function initMaze(){
 }
 
 function finishMaze(){
-	alert("Use the arrow keys to move around, try to get the the red circle in the middle.");
+	alert("Use the arrow keys to move around, try to get to the red circle in the middle.");
 	if(!showMaze){ctx.clearRect(0, 0, canvas.width, canvas.height);}
 	player = {x:Math.floor(Math.random()*(tiles.x.length-2)+1), y:Math.floor(Math.random()*(tiles.y.length-2)+1)};
 	exit = {x:Math.floor(tiles.x.length/2), y:Math.floor(tiles.y.length/2)};
